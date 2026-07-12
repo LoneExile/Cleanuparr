@@ -73,7 +73,7 @@ namespace Cleanuparr.Persistence.Migrations.Events
                         .HasColumnName("is_category_tag");
 
                     b.Property<bool>("IsDryRun")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_dry_run");
 
                     b.Property<string>("ItemHash")
@@ -209,11 +209,11 @@ namespace Cleanuparr.Persistence.Migrations.Events
                         .HasColumnName("instance_url");
 
                     b.Property<bool>("IsDryRun")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_dry_run");
 
                     b.Property<bool>("IsResolved")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_resolved");
 
                     b.Property<string>("ItemHash")
@@ -284,7 +284,7 @@ namespace Cleanuparr.Persistence.Migrations.Events
                     b.HasIndex("Type", "ItemHash")
                         .IsUnique()
                         .HasDatabaseName("ix_manual_events_type_item_hash")
-                        .HasFilter("\"is_resolved\" = 0");
+                        .HasFilter(DatabaseProviderSelector.UsePostgres ? "\"is_resolved\" = false" : "\"is_resolved\" = 0");
 
                     b.ToTable("manual_events", (string)null);
                 });
@@ -321,7 +321,7 @@ namespace Cleanuparr.Persistence.Migrations.Events
                         .HasColumnName("file_id");
 
                     b.Property<bool>("IsMonitored")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_monitored");
 
                     b.Property<string>("ItemType")
@@ -429,15 +429,15 @@ namespace Cleanuparr.Persistence.Migrations.Events
                         .HasColumnName("download_id");
 
                     b.Property<bool>("IsMarkedForRemoval")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_marked_for_removal");
 
                     b.Property<bool>("IsRemoved")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_removed");
 
                     b.Property<bool>("IsReturning")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_returning");
 
                     b.Property<string>("Title")
@@ -607,7 +607,7 @@ namespace Cleanuparr.Persistence.Migrations.Events
                         .HasColumnName("external_item_id");
 
                     b.Property<bool>("IsDryRun")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_dry_run");
 
                     b.Property<string>("ItemTitle")
@@ -660,7 +660,7 @@ namespace Cleanuparr.Persistence.Migrations.Events
                         .HasColumnName("download_item_id");
 
                     b.Property<bool>("IsDryRun")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_dry_run");
 
                     b.Property<Guid>("JobRunId")

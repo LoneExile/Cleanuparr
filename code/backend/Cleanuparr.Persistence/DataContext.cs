@@ -386,19 +386,31 @@ public class DataContext : DbContext
                     .HasConversion((ValueConverter)converter!);
             }
         }
+        // Postgres compatibility: override SQLite INTEGER type for bool properties
+        // (including complex property sub-properties) so Npgsql uses native boolean.
+        // Without this, EnsureCreated generates "boolean = integer" SQL for CHECK
+        // constraints that Postgres rejects.
+        if (DatabaseProviderSelector.UsePostgres)
+        {
+            static void FixBoolTypes(Microsoft.EntityFrameworkCore.Metadata.IMutableEntityType entityType)
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(bool) || property.ClrType == typeof(bool?))
+                    {
+                        property.SetColumnType("boolean");
+                    }
+                }
+            }
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                FixBoolTypes(entityType);
+            }
+        }
     }
 
     private static void SetDbContextOptions(DbContextOptionsBuilder optionsBuilder)
     {
-        if (optionsBuilder.IsConfigured)
-        {
-            return;
-        }
-
-        var dbPath = Path.Combine(ConfigurationPathProvider.GetConfigPath(), "cleanuparr.db");
-        optionsBuilder
-            .UseSqlite($"Data Source={dbPath}")
-            .UseLowerCaseNamingConvention()
-            .UseSnakeCaseNamingConvention();
+        DatabaseProviderSelector.Configure(optionsBuilder, "cleanuparr.db");
     }
 }

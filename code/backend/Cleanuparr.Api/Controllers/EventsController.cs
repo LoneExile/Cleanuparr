@@ -193,7 +193,7 @@ public class EventsController : ControllerBase
                 $$"""
                 SELECT {{bucketExpr}} AS "bucket", event_type AS "event_type", COUNT(*) AS "count"
                 FROM events
-                WHERE timestamp >= {0}
+                WHERE timestamp::timestamp >= {0}::timestamp
                 GROUP BY {{bucketExpr}}, event_type
                 """,
                 cutoffText)

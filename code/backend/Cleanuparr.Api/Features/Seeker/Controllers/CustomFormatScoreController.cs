@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace Cleanuparr.Api.Features.Seeker.Controllers;
 
@@ -247,15 +248,22 @@ public sealed class CustomFormatScoreController : ControllerBase
             """
             WHERE (@instanceId IS NULL OR arr_instance_id = @instanceId)
                 AND (@search IS NULL OR title LIKE @search ESCAPE '\')
-                AND (@cutoff IS NULL OR upgraded_at >= @cutoff)
+                AND (@cutoff IS NULL OR upgraded_at::timestamp >= @cutoff)
             """;
 
-        SqliteParameter[] BuildCommonParameters() => new[]
-        {
-            new SqliteParameter("@instanceId", instanceId.HasValue ? instanceId.Value : DBNull.Value),
-            new SqliteParameter("@search", (object?)searchPattern ?? DBNull.Value),
-            new SqliteParameter("@cutoff", (object?)cutoff ?? DBNull.Value),
-        };
+        System.Data.Common.DbParameter[] BuildCommonParameters() => DatabaseProviderSelector.UsePostgres
+            ? new Npgsql.NpgsqlParameter[]
+              {
+                  new("@instanceId", instanceId.HasValue ? instanceId.Value : DBNull.Value),
+                  new("@search", (object?)searchPattern ?? DBNull.Value),
+                  new("@cutoff", (object?)(cutoff?.ToString("yyyy-MM-dd HH:mm:ss.fffffff")) ?? DBNull.Value),
+              }
+            : new Microsoft.Data.Sqlite.SqliteParameter[]
+              {
+                  new("@instanceId", instanceId.HasValue ? instanceId.Value : DBNull.Value),
+                  new("@search", (object?)searchPattern ?? DBNull.Value),
+                  new("@cutoff", (object?)cutoff ?? DBNull.Value),
+              };
 
         string listSql =
             $"""
@@ -266,12 +274,13 @@ public sealed class CustomFormatScoreController : ControllerBase
              LIMIT @take OFFSET @skip
              """;
 
-        SqliteParameter[] listParams =
-        [
-            ..BuildCommonParameters(),
-            new("@take", pageSize),
-            new("@skip", (page - 1) * pageSize),
-        ];
+        var takeParam = DatabaseProviderSelector.UsePostgres
+            ? (System.Data.Common.DbParameter)new NpgsqlParameter("@take", pageSize)
+            : new SqliteParameter("@take", pageSize);
+        var skipParam = DatabaseProviderSelector.UsePostgres
+            ? (System.Data.Common.DbParameter)new NpgsqlParameter("@skip", (page - 1) * pageSize)
+            : new SqliteParameter("@skip", (page - 1) * pageSize);
+        var listParams = BuildCommonParameters().Concat(new System.Data.Common.DbParameter[] { takeParam, skipParam }).ToArray();
 
         var rows = await _eventsContext.Database
             .SqlQueryRaw<UpgradeSqlRow>(listSql, listParams)

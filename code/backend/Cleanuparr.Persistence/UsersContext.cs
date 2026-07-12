@@ -86,19 +86,24 @@ public class UsersContext : DbContext
             entity.Property(v => v.FeatureId)
                 .HasMaxLength(64);
         });
+        // Postgres compatibility: clear SQLite INTEGER type for bools.
+        if (DatabaseProviderSelector.UsePostgres)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(bool) || property.ClrType == typeof(bool?))
+                    {
+                        property.SetColumnType("boolean");
+                    }
+                }
+            }
+        }
     }
 
     private static void SetDbContextOptions(DbContextOptionsBuilder optionsBuilder)
     {
-        if (optionsBuilder.IsConfigured)
-        {
-            return;
-        }
-
-        var dbPath = Path.Combine(ConfigurationPathProvider.GetConfigPath(), "users.db");
-        optionsBuilder
-            .UseSqlite($"Data Source={dbPath}")
-            .UseLowerCaseNamingConvention()
-            .UseSnakeCaseNamingConvention();
+        DatabaseProviderSelector.Configure(optionsBuilder, "users.db");
     }
 }

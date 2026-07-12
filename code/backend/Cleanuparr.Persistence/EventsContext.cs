@@ -95,7 +95,7 @@ public class EventsContext : DbContext
             // Partial unique index — resolved rows are exempt, so history/cooldown is unaffected.
             entity.HasIndex(e => new { e.Type, e.ItemHash })
                 .IsUnique()
-                .HasFilter("\"is_resolved\" = 0");
+                .HasFilter(DatabaseProviderSelector.UsePostgres ? "\"is_resolved\" = false" : "\"is_resolved\" = 0");
         });
 
         modelBuilder.Entity<SeekerHistory>(entity =>
@@ -148,19 +148,24 @@ public class EventsContext : DbContext
                     .HasConversion((ValueConverter)converter);
             }
         }
+        // Postgres compatibility: clear SQLite INTEGER type for bools.
+        if (DatabaseProviderSelector.UsePostgres)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(bool) || property.ClrType == typeof(bool?))
+                    {
+                        property.SetColumnType("boolean");
+                    }
+                }
+            }
+        }
     }
     
     private static void SetDbContextOptions(DbContextOptionsBuilder optionsBuilder)
     {
-        if (optionsBuilder.IsConfigured)
-        {
-            return;
-        }
-        
-        var dbPath = Path.Combine(ConfigurationPathProvider.GetConfigPath(), "events.db");
-        optionsBuilder
-            .UseSqlite($"Data Source={dbPath}")
-            .UseLowerCaseNamingConvention()
-            .UseSnakeCaseNamingConvention();
+        DatabaseProviderSelector.Configure(optionsBuilder, "events.db");
     }
 } 

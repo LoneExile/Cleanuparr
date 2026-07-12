@@ -1,20 +1,4 @@
-# Build Angular frontend
-FROM --platform=$BUILDPLATFORM node:26-alpine AS frontend-build
-WORKDIR /app
-
-# Copy package files first for better layer caching
-COPY frontend/package*.json ./
-# Use cache mount for npm to speed up builds
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci && npm install -g @angular/cli
-
-# Copy source code
-COPY frontend/ .
-
-# Build with appropriate base-href and deploy-url
-RUN npm run build
-
-# Build .NET backend
+# Build .NET backend (must be before frontend-build so BuildKit can serialize)
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG TARGETARCH
 ARG VERSION=0.0.1
@@ -26,8 +10,11 @@ EXPOSE 11011
 # Copy source code
 COPY backend/ ./backend/
 
-# Add NuGet source
-RUN dotnet nuget add source --username ${PACKAGES_USERNAME} --password ${PACKAGES_PAT} --store-password-in-clear-text --name Cleanuparr https://nuget.pkg.github.com/Cleanuparr/index.json
+# Add private GitHub Packages NuGet feed (FLM.QBittorrent/FLM.Transmission).
+# Skip if PACKAGES_USERNAME/PACKAGES_PAT aren't set (e.g. fork builds without GitHub PAT).
+RUN if [ -n "$PACKAGES_USERNAME" ] && [ -n "$PACKAGES_PAT" ]; then \
+      dotnet nuget add source --username "$PACKAGES_USERNAME" --password "$PACKAGES_PAT" --store-password-in-clear-text --name Cleanuparr https://nuget.pkg.github.com/Cleanuparr/index.json; \
+    else echo "Skipping private NuGet feed (no GitHub Packages credentials)"; fi
 
 # Restore and publish with cache mount
 RUN --mount=type=cache,target=/root/.nuget/packages,sharing=locked \
@@ -39,7 +26,13 @@ RUN --mount=type=cache,target=/root/.nuget/packages,sharing=locked \
     --no-restore \
     /p:Version=${VERSION} \
     /p:PublishSingleFile=true \
-    /p:DebugSymbols=false
+    /p:DebugSymbols=false \
+    /p:PublishReadyToRun=false
+
+# Angular frontend — pre-built locally (npm run build -- --configuration production)
+# and committed as frontend/dist/. The Angular 22 build is too memory-hungry
+# (>8Gi) for the in-cluster GitLab runner, so we build on a host with enough RAM
+# and just copy the output here.
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
@@ -77,8 +70,8 @@ WORKDIR /app
 
 # Copy backend
 COPY --from=build /app/publish .
-# Copy frontend to wwwroot
-COPY --from=frontend-build /app/dist/ui/browser ./wwwroot
+# Copy frontend to wwwroot (pre-built, see note above)
+COPY frontend/dist/ui/browser ./wwwroot
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

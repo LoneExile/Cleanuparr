@@ -31,7 +31,7 @@ namespace Cleanuparr.Persistence.Migrations.Users
                         .HasColumnName("code_hash");
 
                     b.Property<bool>("IsUsed")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_used");
 
                     b.Property<DateTimeOffset?>("UsedAt")
@@ -141,11 +141,11 @@ namespace Cleanuparr.Persistence.Migrations.Users
                         .HasColumnName("plex_username");
 
                     b.Property<bool>("SetupCompleted")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("setup_completed");
 
                     b.Property<bool>("TotpEnabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("totp_enabled");
 
                     b.Property<string>("TotpSecret")
@@ -186,11 +186,11 @@ namespace Cleanuparr.Persistence.Migrations.Users
                                 .HasColumnName("oidc_client_secret");
 
                             b1.Property<bool>("Enabled")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("oidc_enabled");
 
                             b1.Property<bool>("ExclusiveMode")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("oidc_exclusive_mode");
 
                             b1.Property<string>("IssuerUrl")

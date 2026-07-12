@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-beasties-container>
+<head>
+  <meta charset="utf-8">
+  <title>Cleanuparr</title>
+  <script>
+    (function() {
+      let basePath = '/';
+
+      if (window['_server_base_path']) {
+        basePath = window['_server_base_path'];
+      }
+
+      window['_app_base'] = basePath;
+
+      const baseTag = document.createElement('base');
+      baseTag.href = basePath === '/' ? '/' : basePath + '/';
+      document.head.appendChild(baseTag);
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/128.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1a1135">
+
+  <!-- iOS support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Cleanuparr">
+  <link rel="apple-touch-icon" href="icons/128.png">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+<style>:root{--brand-50:#f5f3ff;--brand-100:#ede9fe;--brand-200:#ddd6fe;--brand-300:#c4b5fd;--brand-400:#a78bfa;--brand-500:#8b5cf6;--brand-600:#7c3aed;--brand-700:#6d28d9;--brand-800:#5b21b6;--brand-900:#4c1d95;--brand-950:#2e1065;--accent-rgb:139, 92, 246;--color-success:#22c55e;--color-success-dim:#166534;--color-warning:#f59e0b;--color-warning-dim:#92400e;--color-warning-bg:color-mix(in srgb, #f59e0b 10%, transparent);--color-error:#ef4444;--color-error-dim:#991b1b;--color-info:#3b82f6;--color-info-dim:#1e40af;--new-badge-flame-start:#ffb020;--new-badge-flame-mid:#ff6a00;--new-badge-flame-end:#f5333f;--new-badge-glow-rgb:255, 90, 0;--space-0:0;--space-px:1px;--space-0-5:.125rem;--space-1:.25rem;--space-1-5:.375rem;--space-2:.5rem;--space-2-5:.625rem;--space-3:.75rem;--space-3-5:.875rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-7:1.75rem;--space-8:2rem;--space-9:2.25rem;--space-10:2.5rem;--space-12:3rem;--space-14:3.5rem;--space-16:4rem;--space-20:5rem;--radius-none:0;--radius-sm:.25rem;--radius-md:.375rem;--radius-lg:.5rem;--radius-xl:.75rem;--radius-2xl:1rem;--radius-3xl:1.5rem;--radius-full:9999px;--font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;--font-mono:JetBrains Mono, Fira Code, Cascadia Code, Consolas, monospace;--font-size-xs:.75rem;--font-size-sm:.875rem;--font-size-base:1rem;--font-size-lg:1.125rem;--font-size-xl:1.25rem;--font-size-2xl:1.5rem;--font-size-3xl:1.875rem;--font-size-4xl:2.25rem;--duration-fast:.15s;--duration-normal:.35s;--duration-slow:.4s;--ease-default:cubic-bezier(.4, 0, .2, 1);--glass-blur:12px;--glass-blur-sm:8px;--glass-blur-lg:20px;--sidebar-width:260px;--sidebar-collapsed-width:64px;--toolbar-height:56px;--content-max-width:1400px;--input-height:38px;--drawer-width:420px;--toast-max-width:400px;--shadow-tooltip:0 4px 12px rgba(0, 0, 0, .3);--plex-brand:#e5a00d;--plex-brand-ink:#1a1a2e;--plex-brand-hover:#d4920c;--surface-always-light:#ffffff;--z-dropdown:100;--z-sticky:200;--z-fixed:300;--z-overlay:400;--z-modal:500;--z-popover:600;--z-tooltip:700;--z-toast:800}:root{--surface-ground:#0c0614;--surface-ground:color-mix(in srgb, var(--brand-500) 8%, #000000);--surface-section:#14091e;--surface-section:color-mix(in srgb, var(--brand-500) 14%, #000000);--surface-card:rgba(20, 11, 34, .75);--surface-card:color-mix(in srgb, var(--brand-500) 12%, rgba(0, 0, 0, .75));--surface-overlay:rgba(12, 6, 20, .92);--surface-overlay:color-mix(in srgb, var(--brand-500) 6%, rgba(0, 0, 0, .92));--surface-elevated:rgba(30, 18, 50, .65);--surface-elevated:color-mix(in srgb, var(--brand-500) 16%, rgba(0, 0, 0, .65));--glass-bg:rgba(255, 255, 255, .04);--glass-bg-hover:rgba(255, 255, 255, .07);--glass-bg-active:rgba(255, 255, 255, .1);--glass-border:rgba(255, 255, 255, .08);--glass-border-hover:rgba(255, 255, 255, .15);--glass-shadow:0 8px 32px rgba(0, 0, 0, .4);--text-primary:rgba(255, 255, 255, .92);--text-secondary:rgba(255, 255, 255, .6);--text-tertiary:rgba(255, 255, 255, .4);--text-disabled:rgba(255, 255, 255, .25);--text-inverse:rgba(0, 0, 0, .9);--color-primary:var(--brand-500);--color-primary-hover:var(--brand-400);--color-primary-active:var(--brand-300);--color-primary-text:#ffffff;--color-primary-subtle:rgba(var(--accent-rgb), .15);--sidebar-bg:linear-gradient(180deg, var(--brand-950) 0%, var(--surface-ground) 100%);--sidebar-border:rgba(255, 255, 255, .06);--sidebar-item-text:rgba(255, 255, 255, .65);--sidebar-item-hover:rgba(var(--accent-rgb), .12);--sidebar-item-active:rgba(var(--accent-rgb), .22);--sidebar-item-active-text:#ffffff;--sidebar-section-label:rgba(255, 255, 255, .45);--sidebar-section-label-hover:rgba(255, 255, 255, .65);--toolbar-bg:rgba(12, 6, 20, .8);--toolbar-bg:color-mix(in srgb, var(--brand-500) 6%, rgba(0, 0, 0, .8));--toolbar-border:rgba(255, 255, 255, .06);--input-bg:rgba(255, 255, 255, .04);--input-bg-hover:rgba(255, 255, 255, .06);--input-border:rgba(255, 255, 255, .1);--input-border-hover:rgba(255, 255, 255, .18);--input-border-focus:var(--brand-500);--input-placeholder:rgba(255, 255, 255, .3);--input-text:var(--text-primary);--scrollbar-track:transparent;--scrollbar-thumb:rgba(var(--accent-rgb), .45);--scrollbar-thumb-hover:rgba(var(--accent-rgb), .7);--dropdown-bg:rgba(20, 11, 34, .97);--dropdown-bg:color-mix(in srgb, var(--brand-500) 10%, rgba(0, 0, 0, .97));--divider:rgba(255, 255, 255, .08);--focus-ring:var(--brand-500);--focus-ring-offset:var(--surface-ground);--logo-fg:#000000;--logo-accent:var(--color-primary);--sidebar-fade:rgba(12, 6, 20, .9);--sidebar-fade:color-mix(in srgb, var(--surface-ground) 90%, transparent);--orb-opacity:.15;--orb-blur:120px;--orb-primary:radial-gradient(circle, var(--brand-500), var(--brand-800));--orb-secondary:radial-gradient(circle, var(--brand-400), var(--brand-600));--orb-tertiary:radial-gradient(circle, var(--brand-400), var(--brand-700))}*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}html{-webkit-text-size-adjust:100%;tab-size:4}body{min-height:100vh;min-height:100dvh;color:var(--text-primary);background-color:var(--surface-ground);overflow-x:hidden}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url("./media/inter-latin-variable-23IH4P32.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:JetBrains Mono;font-style:normal;font-weight:100 800;font-display:swap;src:url("./media/jetbrains-mono-latin-variable-VBS632QH.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}body{font-family:var(--font-family);font-size:var(--font-size-base);line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}*{scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) var(--scrollbar-track)}@media(prefers-reduced-motion:reduce){:root{--glass-blur:0px;--glass-blur-sm:0px;--glass-blur-lg:0px;--glass-shadow:none;--surface-elevated:#1e1232;--surface-elevated:color-mix(in srgb, var(--brand-500) 22%, #000000);--duration-fast:0ms;--duration-normal:0ms;--duration-slow:0ms}*:not([role=status]):not([role=status] *),*:not([role=status]):not([role=status] *):before,*:not([role=status]):not([role=status] *):after{animation-duration:0ms!important;animation-delay:0ms!important;transition-duration:0ms!important;transition-delay:0ms!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}</style><link rel="stylesheet" href="styles-WR2AJ67W.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-WR2AJ67W.css"></noscript></head>
+<body>
+  <app-root></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+<script src="main-C2AT5ILT.js" type="module"></script></body>
+</html>

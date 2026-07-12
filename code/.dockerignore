@@ -18,7 +18,7 @@ Thumbs.db
 
 # Node.js
 frontend/node_modules/
-frontend/dist/
+# frontend/dist/ — NOT ignored (pre-built frontend is committed for the Docker build)
 frontend/.angular/
 
 # .NET

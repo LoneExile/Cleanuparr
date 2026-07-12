@@ -227,7 +227,7 @@ public class StatsService : IStatsService
         bool malwareOnly = metric == "malwareBlocked";
 
         List<object> parameters = [cutoff.UtcDateTime.ToString("yyyy-MM-dd HH:mm:ss.fffffff", CultureInfo.InvariantCulture)];
-        StringBuilder where = new("WHERE timestamp >= {0}");
+        StringBuilder where = new(DatabaseProviderSelector.UsePostgres ? "WHERE timestamp::timestamp >= {0}" : "WHERE timestamp >= {0}");
 
         if (types is not null)
         {
@@ -245,7 +245,7 @@ public class StatsService : IStatsService
 
         if (!includeDryRun)
         {
-            where.Append(" AND is_dry_run = 0");
+            where.Append($" AND is_dry_run = {(DatabaseProviderSelector.UsePostgres ? "false" : "0")}");
         }
 
         string bucketExpr = TimelineBucketing.BucketExpr(size);

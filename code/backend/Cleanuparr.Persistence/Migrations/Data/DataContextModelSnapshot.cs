@@ -57,7 +57,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("arr_config_id");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<string>("ExternalUrl")
@@ -104,7 +104,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("cron_expression");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.HasKey("Id")
@@ -130,7 +130,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("download_client_config_id");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<ushort>("MaxStrikes")
@@ -143,7 +143,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("target_category");
 
                     b.Property<bool>("UseTag")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_tag");
 
                     b.HasKey("Id")
@@ -169,7 +169,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("categories");
 
                     b.Property<bool>("DeleteSourceFiles")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_source_files");
 
                     b.Property<Guid>("DownloadClientConfigId")
@@ -233,7 +233,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("cron_expression");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.PrimitiveCollection<string>("IgnoredDownloads")
@@ -242,7 +242,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("ignored_downloads");
 
                     b.Property<bool>("UseAdvancedScheduling")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_advanced_scheduling");
 
                     b.HasKey("Id")
@@ -263,7 +263,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("download_client_config_id");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<string>("ExcludePatterns")
@@ -312,7 +312,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("categories");
 
                     b.Property<bool>("DeleteSourceFiles")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_source_files");
 
                     b.Property<Guid>("DownloadClientConfigId")
@@ -386,7 +386,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("categories");
 
                     b.Property<bool>("DeleteSourceFiles")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_source_files");
 
                     b.Property<Guid>("DownloadClientConfigId")
@@ -446,7 +446,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("categories");
 
                     b.Property<bool>("DeleteSourceFiles")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_source_files");
 
                     b.Property<Guid>("DownloadClientConfigId")
@@ -520,7 +520,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("categories");
 
                     b.Property<bool>("DeleteSourceFiles")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_source_files");
 
                     b.Property<Guid>("DownloadClientConfigId")
@@ -588,7 +588,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("download_client_config_id");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.PrimitiveCollection<string>("IgnoredRootDirs")
@@ -602,7 +602,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("target_category");
 
                     b.Property<bool>("UseTag")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_tag");
 
                     b.HasKey("Id")
@@ -631,7 +631,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("download_directory_target");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<string>("ExternalUrl")
@@ -683,11 +683,11 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("id");
 
                     b.Property<bool>("DisplaySupportBanner")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("display_support_banner");
 
                     b.Property<bool>("DryRun")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("dry_run");
 
                     b.Property<string>("EncryptionKey")
@@ -718,7 +718,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("ignored_downloads");
 
                     b.Property<bool>("StatusCheckEnabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("status_check_enabled");
 
                     b.Property<ushort>("StrikeInactivityWindowHours")
@@ -730,11 +730,11 @@ namespace Cleanuparr.Persistence.Migrations.Data
                             b1.IsRequired();
 
                             b1.Property<bool>("DisableAuthForLocalAddresses")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("auth_disable_auth_for_local_addresses");
 
                             b1.Property<bool>("TrustForwardedHeaders")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("auth_trust_forwarded_headers");
 
                             b1.Property<string>("TrustedNetworks")
@@ -748,7 +748,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                             b1.IsRequired();
 
                             b1.Property<bool>("ArchiveEnabled")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("log_archive_enabled");
 
                             b1.Property<ushort>("ArchiveRetainedCount")
@@ -796,19 +796,19 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("cron_expression");
 
                     b.Property<bool>("DeleteIfAnyFileBlocked")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_if_any_file_blocked");
 
                     b.Property<bool>("DeletePrivate")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_private");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<bool>("IgnorePrivate")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("ignore_private");
 
                     b.PrimitiveCollection<string>("IgnoredDownloads")
@@ -817,11 +817,11 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("ignored_downloads");
 
                     b.Property<bool>("ProcessNoContentId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("process_no_content_id");
 
                     b.Property<bool>("UseAdvancedScheduling")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_advanced_scheduling");
 
                     b.ComplexProperty(typeof(Dictionary<string, object>), "Lidarr", "Cleanuparr.Persistence.Models.Configuration.MalwareBlocker.ContentBlockerConfig.Lidarr#BlocklistSettings", b1 =>
@@ -838,7 +838,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                                 .HasColumnName("lidarr_blocklist_type");
 
                             b1.Property<bool>("Enabled")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("lidarr_enabled");
                         });
 
@@ -856,7 +856,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                                 .HasColumnName("radarr_blocklist_type");
 
                             b1.Property<bool>("Enabled")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("radarr_enabled");
                         });
 
@@ -874,7 +874,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                                 .HasColumnName("readarr_blocklist_type");
 
                             b1.Property<bool>("Enabled")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("readarr_enabled");
                         });
 
@@ -892,7 +892,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                                 .HasColumnName("sonarr_blocklist_type");
 
                             b1.Property<bool>("Enabled")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("sonarr_enabled");
                         });
 
@@ -909,7 +909,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                                 .HasColumnName("whisparr_blocklist_type");
 
                             b1.Property<bool>("Enabled")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("whisparr_enabled");
                         });
 
@@ -1089,7 +1089,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("created_at");
 
                     b.Property<bool>("IsEnabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_enabled");
 
                     b.Property<string>("Name")
@@ -1099,35 +1099,35 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("name");
 
                     b.Property<bool>("OnCategoryChanged")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_category_changed");
 
                     b.Property<bool>("OnDownloadCleaned")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_download_cleaned");
 
                     b.Property<bool>("OnFailedImportStrike")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_failed_import_strike");
 
                     b.Property<bool>("OnQueueItemDeleted")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_queue_item_deleted");
 
                     b.Property<bool>("OnSearchItemGrabbed")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_search_item_grabbed");
 
                     b.Property<bool>("OnSearchTriggered")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_search_triggered");
 
                     b.Property<bool>("OnSlowStrike")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_slow_strike");
 
                     b.Property<bool>("OnStalledStrike")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("on_stalled_strike");
 
                     b.Property<string>("Type")
@@ -1297,7 +1297,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("notification_config_id");
 
                     b.Property<bool>("SendSilently")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("send_silently");
 
                     b.Property<string>("TopicId")
@@ -1332,7 +1332,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("downloading_metadata_max_strikes");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.PrimitiveCollection<string>("IgnoredDownloads")
@@ -1341,11 +1341,11 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("ignored_downloads");
 
                     b.Property<bool>("ProcessNoContentId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("process_no_content_id");
 
                     b.Property<bool>("UseAdvancedScheduling")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_advanced_scheduling");
 
                     b.ComplexProperty(typeof(Dictionary<string, object>), "FailedImport", "Cleanuparr.Persistence.Models.Configuration.QueueCleaner.QueueCleanerConfig.FailedImport#FailedImportConfig", b1 =>
@@ -1353,15 +1353,15 @@ namespace Cleanuparr.Persistence.Migrations.Data
                             b1.IsRequired();
 
                             b1.Property<bool>("ChangeCategory")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("failed_import_change_category");
 
                             b1.Property<bool>("DeletePrivate")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("failed_import_delete_private");
 
                             b1.Property<bool>("IgnorePrivate")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("failed_import_ignore_private");
 
                             b1.Property<ushort>("MaxStrikes")
@@ -1379,7 +1379,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                                 .HasColumnName("failed_import_patterns");
 
                             b1.Property<bool>("SkipIfNotFoundInClient")
-                                .HasColumnType("INTEGER")
+                                .HasColumnType("boolean")
                                 .HasColumnName("failed_import_skip_if_not_found_in_client");
                         });
 
@@ -1397,15 +1397,15 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("id");
 
                     b.Property<bool>("ChangeCategory")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("change_category");
 
                     b.Property<bool>("DeletePrivateTorrentsFromClient")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_private_torrents_from_client");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<string>("IgnoreAboveSize")
@@ -1448,7 +1448,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("queue_cleaner_config_id");
 
                     b.Property<bool>("ResetStrikesOnProgress")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("reset_strikes_on_progress");
 
                     b.HasKey("Id")
@@ -1468,15 +1468,15 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("id");
 
                     b.Property<bool>("ChangeCategory")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("change_category");
 
                     b.Property<bool>("DeletePrivateTorrentsFromClient")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("delete_private_torrents_from_client");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<ushort>("MaxCompletionPercentage")
@@ -1510,7 +1510,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("queue_cleaner_config_id");
 
                     b.Property<bool>("ResetStrikesOnProgress")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("reset_strikes_on_progress");
 
                     b.HasKey("Id")
@@ -1534,11 +1534,11 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("post_release_grace_hours");
 
                     b.Property<bool>("ProactiveSearchEnabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("proactive_search_enabled");
 
                     b.Property<bool>("SearchEnabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("search_enabled");
 
                     b.Property<ushort>("SearchInterval")
@@ -1551,7 +1551,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("selection_strategy");
 
                     b.Property<bool>("UseRoundRobin")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_round_robin");
 
                     b.HasKey("Id")
@@ -1580,7 +1580,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("current_cycle_id");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
                     b.Property<string>("LastProcessedAt")
@@ -1592,7 +1592,7 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("min_cycle_time_days");
 
                     b.Property<bool>("MonitoredOnly")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("monitored_only");
 
                     b.PrimitiveCollection<string>("SkipTags")
@@ -1605,11 +1605,11 @@ namespace Cleanuparr.Persistence.Migrations.Data
                         .HasColumnName("total_eligible_items");
 
                     b.Property<bool>("UseCustomFormatScore")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_custom_format_score");
 
                     b.Property<bool>("UseCutoff")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("boolean")
                         .HasColumnName("use_cutoff");
 
                     b.HasKey("Id")
